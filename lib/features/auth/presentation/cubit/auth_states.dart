@@ -17,3 +17,17 @@ class RegisterError extends AuthStates {
 
   RegisterError(this.errorMessage);
 }
+
+class LoginLoading extends AuthStates {}
+
+class LoginSuccess extends AuthStates {
+  final User user;
+
+  LoginSuccess(this.user);
+}
+
+class LoginError extends AuthStates {
+  final String errorMessage;
+
+  LoginError(this.errorMessage);
+}

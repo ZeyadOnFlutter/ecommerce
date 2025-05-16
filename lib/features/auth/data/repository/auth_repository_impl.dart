@@ -5,6 +5,7 @@ import 'package:ecommerce/core/error/faliure.dart';
 import 'package:ecommerce/features/auth/data/data_source/local/auth_local_data_source.dart';
 import 'package:ecommerce/features/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:ecommerce/features/auth/data/mappers/user_mapper.dart';
+import 'package:ecommerce/features/auth/data/models/login_request.dart';
 import 'package:ecommerce/features/auth/data/models/regsiter_request.dart';
 import 'package:ecommerce/features/auth/domain/entities/user.dart';
 import 'package:ecommerce/features/auth/domain/repository/auth_repository.dart';
@@ -22,6 +23,18 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     try {
       final response = await _authRemoteDataSource.register(registerRequest);
+      _authLocalDataSource.saveToken(response.token);
+      log(await _authLocalDataSource.getToken());
+      return Right(response.user.toEntity);
+    } on EcommerceAppExceptions catch (e) {
+      return Left(Faliure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Faliure, User>> login(LoginRequest loginRequest) async {
+    try {
+      final response = await _authRemoteDataSource.login(loginRequest);
       _authLocalDataSource.saveToken(response.token);
       log(await _authLocalDataSource.getToken());
       return Right(response.user.toEntity);

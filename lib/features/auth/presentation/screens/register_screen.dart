@@ -106,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       } else if (state is RegisterSuccess) {
                         UIUtils.hideLoading(context);
                         Navigator.of(context).pushReplacementNamed(Routes.home);
-                      } else {}
+                      }
                     },
                     child: Center(
                       child: SizedBox(

@@ -23,6 +23,8 @@ import 'package:ecommerce/features/auth/data/repository/auth_repository_impl.dar
     as _i638;
 import 'package:ecommerce/features/auth/domain/repository/auth_repository.dart'
     as _i583;
+import 'package:ecommerce/features/auth/domain/use_case/login_use_case.dart'
+    as _i733;
 import 'package:ecommerce/features/auth/domain/use_case/regsiter_use_case.dart'
     as _i454;
 import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart'
@@ -59,10 +61,14 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i1063.AuthRemoteDataSource>(),
           gh<_i350.AuthLocalDataSource>(),
         ));
+    gh.singleton<_i733.LoginUseCase>(
+        () => _i733.LoginUseCase(gh<_i583.AuthRepository>()));
     gh.singleton<_i454.RegsiterUseCase>(
         () => _i454.RegsiterUseCase(gh<_i583.AuthRepository>()));
-    gh.singleton<_i350.AuthCubit>(
-        () => _i350.AuthCubit(gh<_i454.RegsiterUseCase>()));
+    gh.singleton<_i350.AuthCubit>(() => _i350.AuthCubit(
+          gh<_i454.RegsiterUseCase>(),
+          gh<_i733.LoginUseCase>(),
+        ));
     return this;
   }
 }
