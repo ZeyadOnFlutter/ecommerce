@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:ecommerce/core/resources/color_manager.dart';
 import 'package:ecommerce/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AnnouncementsSection extends StatelessWidget {
   final List<String> imagesPaths;
   final int currentIndex;
-  final Timer timer;
 
   const AnnouncementsSection({
     required this.imagesPaths,
     required this.currentIndex,
-    required this.timer,
   });
 
   @override

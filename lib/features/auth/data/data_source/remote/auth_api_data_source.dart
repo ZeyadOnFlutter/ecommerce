@@ -40,10 +40,8 @@ class AuthApiDataSource implements AuthRemoteDataSource {
         ApiManager.signInEndPoint,
         data: loginRequest.toJson(),
       );
-      print(response.data);
       return AuthResponse.fromJson(response.data);
     } on DioException catch (dioException) {
-      print(dioException.response?.data);
       throw ApiErrorHandler.handleDioError(dioException);
     } catch (e) {
       throw RemoteExpetion(e.toString());
