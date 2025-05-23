@@ -23,7 +23,7 @@ class CategoriesApiDataSource implements CategoriesRemoteDataSource {
     } on DioException catch (dioException) {
       throw ApiErrorHandler.handleDioError(dioException);
     } catch (e) {
-      throw RemoteExpetion(e.toString());
+      throw RemoteException(e.toString());
     }
   }
 }

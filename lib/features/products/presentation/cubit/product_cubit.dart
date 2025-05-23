@@ -6,13 +6,15 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class ProductCubit extends Cubit<ProductStates> {
-  ProductCubit(this._productUseCase) : super(ProductInitial());
+  ProductCubit(
+    this._productUseCase,
+  ) : super(ProductInitial());
   final ProductUseCase _productUseCase;
+
   int page = 1;
   bool isLoading = false;
   bool hasMoreData = true;
   List<Product> products = [];
-  int productQuantity = 1;
 
   Future<void> getProducts(
     int limit,
@@ -48,10 +50,5 @@ class ProductCubit extends Cubit<ProductStates> {
     isLoading = false;
     hasMoreData = true;
     products.clear();
-  }
-
-  void changeProductQuantity(int newProductQuantity) {
-    productQuantity = newProductQuantity;
-    emit(ChnagedProductQuantity());
   }
 }

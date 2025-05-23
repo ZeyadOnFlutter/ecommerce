@@ -2,8 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/core/resources/color_manager.dart';
 import 'package:ecommerce/core/resources/styles_manager.dart';
 import 'package:ecommerce/core/routes/routes.dart';
+import 'package:ecommerce/core/service/service_locator.dart';
 import 'package:ecommerce/core/widgets/heart_button.dart';
+import 'package:ecommerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
+import 'package:ecommerce/features/products/presentation/cubit/specific_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,10 +18,12 @@ class ProductItem extends StatelessWidget {
     final Size screenSize = MediaQuery.sizeOf(context);
 
     return InkWell(
-      onTap: () => Navigator.of(context).pushNamed(
-        Routes.productDetails,
-        arguments: product,
-      ),
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          Routes.productDetails,
+        );
+        getIt<SpecificProductCubit>().getSpecificProduct(product.id);
+      },
       child: Container(
         width: screenSize.width * 0.4,
         height: screenSize.height * 0.3,
@@ -128,10 +133,12 @@ class ProductItem extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              getIt<CartCubit>().addToCart(product.id);
+                            },
                             child: Container(
-                              height: screenSize.height * 0.025,
-                              width: screenSize.width * 0.08,
+                              height: 30.h,
+                              width: 30.w,
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: ColorManager.primary,

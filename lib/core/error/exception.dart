@@ -3,10 +3,10 @@ class EcommerceAppExceptions implements Exception {
   const EcommerceAppExceptions(this.message);
 }
 
-class RemoteExpetion extends EcommerceAppExceptions {
-  const RemoteExpetion(super.message);
+class RemoteException extends EcommerceAppExceptions {
+  const RemoteException(super.message);
 }
 
-class LocalExpetion extends EcommerceAppExceptions {
-  const LocalExpetion(super.message);
+class LocalException extends EcommerceAppExceptions {
+  const LocalException(super.message);
 }

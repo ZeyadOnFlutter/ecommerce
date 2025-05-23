@@ -29,6 +29,24 @@ import 'package:ecommerce/features/auth/domain/use_case/regsiter_use_case.dart'
     as _i454;
 import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart'
     as _i350;
+import 'package:ecommerce/features/cart/data/data_source/cart_api_data_source.dart'
+    as _i808;
+import 'package:ecommerce/features/cart/data/data_source/cart_remote_data_source.dart'
+    as _i90;
+import 'package:ecommerce/features/cart/data/repository/cart_repository_impl.dart'
+    as _i1050;
+import 'package:ecommerce/features/cart/domain/repository/cart_repository.dart'
+    as _i243;
+import 'package:ecommerce/features/cart/domain/use_case/add_to_cart_use_case.dart'
+    as _i1053;
+import 'package:ecommerce/features/cart/domain/use_case/delete_from_cart_use_case.dart'
+    as _i993;
+import 'package:ecommerce/features/cart/domain/use_case/get_from_cart_use_case.dart'
+    as _i898;
+import 'package:ecommerce/features/cart/domain/use_case/update_cart_use_case.dart'
+    as _i29;
+import 'package:ecommerce/features/cart/presentation/cubit/cart_cubit.dart'
+    as _i769;
 import 'package:ecommerce/features/home/data/data_source/categories_api_data_source.dart'
     as _i636;
 import 'package:ecommerce/features/home/data/data_source/categories_remote_data_source.dart'
@@ -51,8 +69,14 @@ import 'package:ecommerce/features/products/domain/repository/product_repository
     as _i879;
 import 'package:ecommerce/features/products/domain/use_case/product_use_case.dart'
     as _i498;
+import 'package:ecommerce/features/products/domain/use_case/specific_product_use_case.dart'
+    as _i933;
 import 'package:ecommerce/features/products/presentation/cubit/product_cubit.dart'
     as _i320;
+import 'package:ecommerce/features/products/presentation/cubit/product_quantity_cubit.dart'
+    as _i920;
+import 'package:ecommerce/features/products/presentation/cubit/specific_product_cubit.dart'
+    as _i120;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
@@ -73,16 +97,38 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.prefs,
       preResolve: true,
     );
+    gh.lazySingleton<_i920.ProductQuantityCubit>(
+        () => _i920.ProductQuantityCubit());
     gh.singleton<_i350.AuthLocalDataSource>(
         () => _i132.AuthSharedPrefsDataSource(gh<_i460.SharedPreferences>()));
     gh.singleton<_i361.Dio>(
       () => registerModule.mainDio,
       instanceName: 'MainDio',
     );
+    gh.lazySingleton<_i90.CartRemoteDataSource>(() => _i808.CartApiDataSource(
+          gh<_i361.Dio>(instanceName: 'MainDio'),
+          gh<_i350.AuthLocalDataSource>(),
+        ));
     gh.lazySingleton<_i884.ProductRemoteDataSource>(() =>
         _i614.ProductApiDataSource(gh<_i361.Dio>(instanceName: 'MainDio')));
+    gh.lazySingleton<_i243.CartRepository>(
+        () => _i1050.CartRepositoryImpl(gh<_i90.CartRemoteDataSource>()));
+    gh.lazySingleton<_i1053.AddToCartUseCase>(
+        () => _i1053.AddToCartUseCase(gh<_i243.CartRepository>()));
+    gh.lazySingleton<_i898.GetFromCartUseCase>(
+        () => _i898.GetFromCartUseCase(gh<_i243.CartRepository>()));
+    gh.lazySingleton<_i993.DeleteFromCartUseCase>(
+        () => _i993.DeleteFromCartUseCase(gh<_i243.CartRepository>()));
+    gh.lazySingleton<_i29.UpdateCartUseCase>(
+        () => _i29.UpdateCartUseCase(gh<_i243.CartRepository>()));
     gh.lazySingleton<_i522.CategoriesRemoteDataSource>(() =>
         _i636.CategoriesApiDataSource(gh<_i361.Dio>(instanceName: 'MainDio')));
+    gh.lazySingleton<_i769.CartCubit>(() => _i769.CartCubit(
+          gh<_i1053.AddToCartUseCase>(),
+          gh<_i898.GetFromCartUseCase>(),
+          gh<_i993.DeleteFromCartUseCase>(),
+          gh<_i29.UpdateCartUseCase>(),
+        ));
     gh.singleton<_i1063.AuthRemoteDataSource>(
         () => _i450.AuthApiDataSource(gh<_i361.Dio>(instanceName: 'MainDio')));
     gh.singleton<_i583.AuthRepository>(() => _i638.AuthRepositoryImpl(
@@ -105,8 +151,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i327.CategoriesUseCase(gh<_i423.CategoriesRepository>()));
     gh.lazySingleton<_i498.ProductUseCase>(
         () => _i498.ProductUseCase(gh<_i879.ProductRepository>()));
+    gh.lazySingleton<_i933.SpecificProductUseCase>(
+        () => _i933.SpecificProductUseCase(gh<_i879.ProductRepository>()));
     gh.lazySingleton<_i320.ProductCubit>(
         () => _i320.ProductCubit(gh<_i498.ProductUseCase>()));
+    gh.lazySingleton<_i120.SpecificProductCubit>(
+        () => _i120.SpecificProductCubit(gh<_i933.SpecificProductUseCase>()));
     gh.lazySingleton<_i156.CategoriesCubit>(
         () => _i156.CategoriesCubit(gh<_i327.CategoriesUseCase>()));
     return this;

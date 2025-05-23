@@ -1,14 +1,11 @@
 import 'package:ecommerce/core/routes/routes.dart';
-import 'package:ecommerce/core/service/service_locator.dart';
 import 'package:ecommerce/features/auth/presentation/screens/login_screen.dart';
 import 'package:ecommerce/features/auth/presentation/screens/register_screen.dart';
 import 'package:ecommerce/features/cart/presentation/screens/cart_screen.dart';
 import 'package:ecommerce/features/home/presentation/screens/home_screen.dart';
-import 'package:ecommerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:ecommerce/features/products/presentation/screens/product_details.dart';
 import 'package:ecommerce/features/products/presentation/screens/products_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
@@ -19,10 +16,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.home:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => getIt<ProductCubit>(),
-                  child: const HomeScreen(),
-                ));
+          builder: (_) => const HomeScreen(),
+        );
       case Routes.products:
         return MaterialPageRoute(
           builder: (_) => const ProductsScreen(),

@@ -4,4 +4,5 @@ class ApiManager {
   static const String signInEndPoint = 'api/v1/auth/signin';
   static const String categoriesEndPoint = 'api/v1/categories';
   static const String productsEndPoint = 'api/v1/products';
+  static const String cartEndPoint = 'api/v1/cart';
 }

@@ -4,6 +4,7 @@ import 'package:ecommerce/core/error/exception.dart';
 import 'package:ecommerce/core/resources/api_manager.dart';
 import 'package:ecommerce/features/products/data/data_source/product_remote_data_source.dart';
 import 'package:ecommerce/features/products/data/models/product_reponse.dart';
+import 'package:ecommerce/features/products/data/models/specific_product_response.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ProductRemoteDataSource)
@@ -38,7 +39,21 @@ class ProductApiDataSource implements ProductRemoteDataSource {
     } on DioException catch (dioException) {
       throw ApiErrorHandler.handleDioError(dioException);
     } catch (e) {
-      throw RemoteExpetion(e.toString());
+      throw RemoteException(e.toString());
+    }
+  }
+
+  @override
+  Future<SpecificProductResponse> getSpecificProduct(String productId) async {
+    try {
+      final response = await _mainDio.get(
+        '${ApiManager.productsEndPoint}/$productId',
+      );
+      return SpecificProductResponse.fromJson(response.data);
+    } on DioException catch (dioException) {
+      throw ApiErrorHandler.handleDioError(dioException);
+    } catch (e) {
+      throw RemoteException(e.toString());
     }
   }
 }

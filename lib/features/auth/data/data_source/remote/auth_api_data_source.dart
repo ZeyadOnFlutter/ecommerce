@@ -29,7 +29,7 @@ class AuthApiDataSource implements AuthRemoteDataSource {
       log(dioException.response?.data);
       throw ApiErrorHandler.handleDioError(dioException);
     } catch (e) {
-      throw RemoteExpetion(e.toString());
+      throw RemoteException(e.toString());
     }
   }
 
@@ -44,7 +44,7 @@ class AuthApiDataSource implements AuthRemoteDataSource {
     } on DioException catch (dioException) {
       throw ApiErrorHandler.handleDioError(dioException);
     } catch (e) {
-      throw RemoteExpetion(e.toString());
+      throw RemoteException(e.toString());
     }
   }
 }

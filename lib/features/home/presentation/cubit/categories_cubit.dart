@@ -14,12 +14,8 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
     emit(CategoriesLoading());
     final response = await _categoriesUseCase();
     response.fold(
-      (faliure) => emit(
-        CategoriesError(faliure.message),
-      ),
-      (categories) => emit(
-        CategoriesSuccess(categories),
-      ),
+      (faliure) => emit(CategoriesError(faliure.message)),
+      (categories) => emit(CategoriesSuccess(categories)),
     );
   }
 }

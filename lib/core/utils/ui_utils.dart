@@ -8,7 +8,7 @@ class UIUtils {
         context: context,
         barrierDismissible: false,
         builder: (_) => PopScope(
-          canPop: true,
+          canPop: false,
           child: AlertDialog(
             backgroundColor: Colors.transparent,
             content: SizedBox(

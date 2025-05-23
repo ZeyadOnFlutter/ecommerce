@@ -5,6 +5,10 @@ import 'package:ecommerce/core/routes/route_generator.dart';
 import 'package:ecommerce/core/routes/routes.dart';
 import 'package:ecommerce/core/service/service_locator.dart';
 import 'package:ecommerce/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:ecommerce/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:ecommerce/features/products/presentation/cubit/product_cubit.dart';
+import 'package:ecommerce/features/products/presentation/cubit/product_quantity_cubit.dart';
+import 'package:ecommerce/features/products/presentation/cubit/specific_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +22,18 @@ Future<void> main() async {
       providers: [
         BlocProvider(
           create: (context) => getIt<AuthCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ProductCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CartCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<SpecificProductCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ProductQuantityCubit>(),
         ),
       ],
       child: const ECommerceApp(),
@@ -37,7 +53,7 @@ class ECommerceApp extends StatelessWidget {
       builder: (_, __) => const MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.home,
+        initialRoute: Routes.login,
       ),
     );
   }
