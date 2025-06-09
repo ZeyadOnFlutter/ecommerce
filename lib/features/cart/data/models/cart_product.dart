@@ -14,7 +14,7 @@ class CartProductModel {
 
   final String id;
   final String title;
-  final int quantity;
+  final int? quantity;
   final String imageCover;
   final CategoriesModel category;
   final dynamic brand;

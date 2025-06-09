@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce/core/error/api_error_handler.dart';
 import 'package:ecommerce/core/error/exception.dart';
 import 'package:ecommerce/core/resources/api_manager.dart';
-import 'package:ecommerce/features/auth/data/data_source/local/auth_local_data_source.dart';
 import 'package:ecommerce/features/cart/data/data_source/cart_remote_data_source.dart';
 import 'package:ecommerce/features/cart/data/models/cart_response.dart';
 import 'package:injectable/injectable.dart';
@@ -10,10 +9,9 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: CartRemoteDataSource)
 class CartApiDataSource implements CartRemoteDataSource {
   final Dio _mainDio;
-  final AuthLocalDataSource _authLocalDataSource;
+
   CartApiDataSource(
     @Named('MainDio') this._mainDio,
-    this._authLocalDataSource,
   );
   @override
   Future<void> addToCart(String productId) async {
@@ -23,11 +21,6 @@ class CartApiDataSource implements CartRemoteDataSource {
         data: {
           "productId": productId,
         },
-        options: Options(
-          headers: {
-            'token': await _authLocalDataSource.getToken(),
-          },
-        ),
       );
     } on DioException catch (dioException) {
       throw ApiErrorHandler.handleDioError(dioException);
@@ -41,11 +34,6 @@ class CartApiDataSource implements CartRemoteDataSource {
     try {
       final response = await _mainDio.delete(
         '${ApiManager.cartEndPoint}/$productId',
-        options: Options(
-          headers: {
-            'token': await _authLocalDataSource.getToken(),
-          },
-        ),
       );
       return CartResponse.fromJson(response.data);
     } on DioException catch (dioException) {
@@ -60,11 +48,6 @@ class CartApiDataSource implements CartRemoteDataSource {
     try {
       final response = await _mainDio.get(
         ApiManager.cartEndPoint,
-        options: Options(
-          headers: {
-            'token': await _authLocalDataSource.getToken(),
-          },
-        ),
       );
       return CartResponse.fromJson(response.data);
     } on DioException catch (dioException) {
@@ -82,11 +65,6 @@ class CartApiDataSource implements CartRemoteDataSource {
         data: {
           'count': count.toString(),
         },
-        options: Options(
-          headers: {
-            'token': await _authLocalDataSource.getToken(),
-          },
-        ),
       );
       return CartResponse.fromJson(response.data);
     } on DioException catch (dioException) {

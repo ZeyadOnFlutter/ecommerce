@@ -14,7 +14,7 @@ class CartProductEntity {
 
   final String id;
   final String title;
-  final int quantity;
+  final int? quantity;
   final String imageCover;
   final Categories category;
   final dynamic brand;

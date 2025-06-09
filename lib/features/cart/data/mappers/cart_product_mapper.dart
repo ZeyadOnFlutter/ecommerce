@@ -6,7 +6,7 @@ extension CartProductMapper on CartProductModel {
   CartProductEntity get toEntity => CartProductEntity(
         id: id,
         title: title,
-        quantity: quantity,
+        quantity: quantity ?? 0,
         imageCover: imageCover,
         category: category.toEntity,
         brand: brand,

@@ -19,10 +19,9 @@ class ProductCounter extends StatefulWidget {
 }
 
 class _ProductCounterState extends State<ProductCounter> {
-  late int _counter = widget.initialValue;
-
   @override
   Widget build(BuildContext context) {
+    int _counter = widget.initialValue;
     return Container(
       decoration: BoxDecoration(
         color: ColorManager.primary,

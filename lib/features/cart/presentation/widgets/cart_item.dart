@@ -6,13 +6,15 @@ import 'package:ecommerce/core/resources/styles_manager.dart';
 import 'package:ecommerce/core/resources/values_manager.dart';
 import 'package:ecommerce/core/routes/routes.dart';
 import 'package:ecommerce/core/widgets/product_counter.dart';
-import 'package:ecommerce/features/cart/domain/entities/cart_model_entity.dart';
+import 'package:ecommerce/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:ecommerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem(this._cartModelEntity, this.index);
-  final CartModelEntity _cartModelEntity;
+  const CartItem(this._cartItemEntity, this.index);
+  final CartItemEntity _cartItemEntity;
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class CartItem extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.portrait;
     final width = MediaQuery.sizeOf(context).width;
     final height = MediaQuery.sizeOf(context).height;
+    final cartCubit = context.read<CartCubit>();
 
     return InkWell(
       onTap: () => Navigator.of(context).pushNamed(
@@ -41,8 +44,7 @@ class CartItem extends StatelessWidget {
                     Border.all(color: ColorManager.primary.withOpacity(0.3)),
               ),
               child: CachedNetworkImage(
-                imageUrl:
-                    _cartModelEntity.cartItem[index].cartProduct.imageCover,
+                imageUrl: _cartItemEntity.cartProduct.imageCover,
                 fit: BoxFit.cover,
                 height: isPortrait ? height * 0.142 : height * 0.23,
                 width: isPortrait ? width * 0.29 : 165.w,
@@ -63,7 +65,7 @@ class CartItem extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            _cartModelEntity.cartItem[index].cartProduct.title,
+                            _cartItemEntity.cartProduct.title,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: getBoldStyle(
@@ -73,7 +75,8 @@ class CartItem extends StatelessWidget {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () => cartCubit
+                              .deleteFromCart(_cartItemEntity.cartProduct.id),
                           child: Image.asset(
                             IconsAssets.delete,
                             color: ColorManager.text,
@@ -87,7 +90,7 @@ class CartItem extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'EGP ${_cartModelEntity.cartItem[index].price}',
+                            'EGP ${_cartItemEntity.price}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: getBoldStyle(
@@ -97,9 +100,15 @@ class CartItem extends StatelessWidget {
                           ),
                         ),
                         ProductCounter(
-                          initialValue: 1,
-                          onIncrement: (quantity) {},
-                          onDecrement: (quantity) {},
+                          initialValue: _cartItemEntity.count,
+                          onIncrement: (quantity) => cartCubit.updateCart(
+                            _cartItemEntity.cartProduct.id,
+                            quantity,
+                          ),
+                          onDecrement: (quantity) => cartCubit.updateCart(
+                            _cartItemEntity.cartProduct.id,
+                            quantity,
+                          ),
                         ),
                       ],
                     ),

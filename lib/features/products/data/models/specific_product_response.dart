@@ -39,7 +39,6 @@ class SpecificProductModel {
 
   final int sold;
   final List<String> images;
-
   final int ratingsQuantity;
   final String id;
   final String title;

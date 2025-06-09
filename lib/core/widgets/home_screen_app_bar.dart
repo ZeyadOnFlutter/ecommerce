@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 
 class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? automaticallyImplyLeading;
+
   const HomeScreenAppBar({this.automaticallyImplyLeading});
 
   @override
@@ -88,11 +89,17 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: () => Navigator.of(context).pushNamed(Routes.cart),
-                icon: const ImageIcon(
-                  AssetImage(IconsAssets.cart),
-                  color: ColorManager.primary,
+              Badge.count(
+                offset: const Offset(0, 1),
+                textColor: ColorManager.white,
+                backgroundColor: ColorManager.darkBlue,
+                count: 0,
+                child: IconButton(
+                  onPressed: () => Navigator.of(context).pushNamed(Routes.cart),
+                  icon: const ImageIcon(
+                    AssetImage(IconsAssets.cart),
+                    color: ColorManager.primary,
+                  ),
                 ),
               ),
             ],

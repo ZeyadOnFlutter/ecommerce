@@ -57,7 +57,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             UIUtils.showMessage(state.errorMessage);
           } else if (state is AddToCartSuccess) {
             UIUtils.hideLoading(context);
-            Navigator.pushNamed(context, Routes.cart);
+            UIUtils.showMessage("Item Added To Cart Successfully");
           }
         },
         child: Scaffold(

@@ -105,30 +105,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.mainDio,
       instanceName: 'MainDio',
     );
-    gh.lazySingleton<_i90.CartRemoteDataSource>(() => _i808.CartApiDataSource(
-          gh<_i361.Dio>(instanceName: 'MainDio'),
-          gh<_i350.AuthLocalDataSource>(),
-        ));
     gh.lazySingleton<_i884.ProductRemoteDataSource>(() =>
         _i614.ProductApiDataSource(gh<_i361.Dio>(instanceName: 'MainDio')));
-    gh.lazySingleton<_i243.CartRepository>(
-        () => _i1050.CartRepositoryImpl(gh<_i90.CartRemoteDataSource>()));
-    gh.lazySingleton<_i1053.AddToCartUseCase>(
-        () => _i1053.AddToCartUseCase(gh<_i243.CartRepository>()));
-    gh.lazySingleton<_i898.GetFromCartUseCase>(
-        () => _i898.GetFromCartUseCase(gh<_i243.CartRepository>()));
-    gh.lazySingleton<_i993.DeleteFromCartUseCase>(
-        () => _i993.DeleteFromCartUseCase(gh<_i243.CartRepository>()));
-    gh.lazySingleton<_i29.UpdateCartUseCase>(
-        () => _i29.UpdateCartUseCase(gh<_i243.CartRepository>()));
     gh.lazySingleton<_i522.CategoriesRemoteDataSource>(() =>
         _i636.CategoriesApiDataSource(gh<_i361.Dio>(instanceName: 'MainDio')));
-    gh.lazySingleton<_i769.CartCubit>(() => _i769.CartCubit(
-          gh<_i1053.AddToCartUseCase>(),
-          gh<_i898.GetFromCartUseCase>(),
-          gh<_i993.DeleteFromCartUseCase>(),
-          gh<_i29.UpdateCartUseCase>(),
-        ));
+    gh.lazySingleton<_i90.CartRemoteDataSource>(
+        () => _i808.CartApiDataSource(gh<_i361.Dio>(instanceName: 'MainDio')));
     gh.singleton<_i1063.AuthRemoteDataSource>(
         () => _i450.AuthApiDataSource(gh<_i361.Dio>(instanceName: 'MainDio')));
     gh.singleton<_i583.AuthRepository>(() => _i638.AuthRepositoryImpl(
@@ -145,8 +127,24 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i454.RegsiterUseCase>(),
           gh<_i733.LoginUseCase>(),
         ));
+    gh.lazySingleton<_i243.CartRepository>(
+        () => _i1050.CartRepositoryImpl(gh<_i90.CartRemoteDataSource>()));
     gh.lazySingleton<_i423.CategoriesRepository>(() =>
         _i962.CategoriesRepositoryImpl(gh<_i522.CategoriesRemoteDataSource>()));
+    gh.lazySingleton<_i1053.AddToCartUseCase>(
+        () => _i1053.AddToCartUseCase(gh<_i243.CartRepository>()));
+    gh.lazySingleton<_i898.GetFromCartUseCase>(
+        () => _i898.GetFromCartUseCase(gh<_i243.CartRepository>()));
+    gh.lazySingleton<_i993.DeleteFromCartUseCase>(
+        () => _i993.DeleteFromCartUseCase(gh<_i243.CartRepository>()));
+    gh.lazySingleton<_i29.UpdateCartUseCase>(
+        () => _i29.UpdateCartUseCase(gh<_i243.CartRepository>()));
+    gh.lazySingleton<_i769.CartCubit>(() => _i769.CartCubit(
+          gh<_i1053.AddToCartUseCase>(),
+          gh<_i898.GetFromCartUseCase>(),
+          gh<_i993.DeleteFromCartUseCase>(),
+          gh<_i29.UpdateCartUseCase>(),
+        ));
     gh.lazySingleton<_i327.CategoriesUseCase>(
         () => _i327.CategoriesUseCase(gh<_i423.CategoriesRepository>()));
     gh.lazySingleton<_i498.ProductUseCase>(

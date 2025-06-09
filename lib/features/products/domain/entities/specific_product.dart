@@ -33,7 +33,7 @@ class SpecificProduct {
   final String description;
   final int quantity;
   final int price;
-  final int priceAfterDiscount;
+  final int? priceAfterDiscount;
   final String imageCover;
   final Categories category;
   final Brand brand;

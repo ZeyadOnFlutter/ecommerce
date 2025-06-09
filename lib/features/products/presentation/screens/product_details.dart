@@ -8,7 +8,6 @@ import 'package:ecommerce/core/widgets/loading_indicator.dart';
 import 'package:ecommerce/core/widgets/product_counter.dart';
 import 'package:ecommerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:ecommerce/features/products/presentation/cubit/produc_states.dart';
-import 'package:ecommerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:ecommerce/features/products/presentation/cubit/product_quantity_cubit.dart';
 import 'package:ecommerce/features/products/presentation/cubit/specific_product_cubit.dart';
 import 'package:ecommerce/features/products/presentation/widgets/product_description.dart';
@@ -28,7 +27,6 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  final _productCubit = getIt<ProductCubit>();
   final _productQuantityCubit = getIt<ProductQuantityCubit>();
   final _cartCubit = getIt<CartCubit>();
   @override
