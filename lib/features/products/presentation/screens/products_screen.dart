@@ -1,5 +1,4 @@
 import 'package:ecommerce/core/resources/values_manager.dart';
-import 'package:ecommerce/core/routes/routes.dart';
 import 'package:ecommerce/core/service/service_locator.dart';
 import 'package:ecommerce/core/utils/ui_utils.dart';
 import 'package:ecommerce/core/widgets/error_indicator.dart';
