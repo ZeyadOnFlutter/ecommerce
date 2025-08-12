@@ -4,4 +4,5 @@ import 'package:ecommerce/features/home/domain/entities/categories.dart';
 
 abstract class CategoriesRepository {
   Future<Either<Faliure, List<Categories>>> getCategories();
+  Future<Either<Faliure, List<Categories>>> getSubCategories(String categoryId);
 }

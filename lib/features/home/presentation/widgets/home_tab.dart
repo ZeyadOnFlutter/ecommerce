@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:ecommerce/core/resources/assets_manager.dart';
-import 'package:ecommerce/core/service/service_locator.dart';
 import 'package:ecommerce/core/widgets/error_indicator.dart';
 import 'package:ecommerce/core/widgets/loading_indicator.dart';
 import 'package:ecommerce/features/home/presentation/cubit/categories_cubit.dart';
@@ -37,51 +35,48 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<CategoriesCubit>(),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            AnnouncementsSection(
-              imagesPaths: _announcementsImagesPaths,
-              currentIndex: _currentIndex,
-            ),
-            Column(
-              children: [
-                CustomSectionBar(
-                  sectionName: 'Categories',
-                  onViewAllClicked: () {},
-                ),
-                BlocBuilder<CategoriesCubit, CategoriesStates>(
-                  builder: (context, state) {
-                    if (state is CategoriesLoading) {
-                      return const LoadingIndicator();
-                    } else if (state is CategoriesError) {
-                      return const ErrorIndicator();
-                    } else if (state is CategoriesSuccess) {
-                      return SizedBox(
-                        height: 270.h,
-                        child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                          ),
-                          itemBuilder: (_, index) =>
-                              CategoryItem(state.categories[index]),
-                          itemCount: state.categories.length,
-                          scrollDirection: Axis.horizontal,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          AnnouncementsSection(
+            imagesPaths: _announcementsImagesPaths,
+            currentIndex: _currentIndex,
+          ),
+          Column(
+            children: [
+              CustomSectionBar(
+                sectionName: 'Categories',
+                onViewAllClicked: () {},
+              ),
+              BlocBuilder<CategoriesCubit, CategoriesStates>(
+                builder: (context, state) {
+                  if (state is CategoriesLoading) {
+                    return const LoadingIndicator();
+                  } else if (state is CategoriesError) {
+                    return const ErrorIndicator();
+                  } else if (state is CategoriesSuccess) {
+                    return SizedBox(
+                      height: 270.h,
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
                         ),
-                      );
-                    } else {
-                      return const SizedBox.shrink();
-                    }
-                  },
-                ),
-                SizedBox(height: 12.h),
-              ],
-            ),
-          ],
-        ),
+                        itemBuilder: (_, index) =>
+                            CategoryItem(state.categories[index]),
+                        itemCount: state.categories.length,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+              SizedBox(height: 12.h),
+            ],
+          ),
+        ],
       ),
     );
   }

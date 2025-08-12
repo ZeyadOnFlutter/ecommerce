@@ -20,7 +20,6 @@ class SubCategoryItem extends StatelessWidget {
       onTap: () => Navigator.of(context).pushNamed(Routes.products),
       overlayColor: WidgetStateProperty.all(Colors.transparent),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           AspectRatio(
             aspectRatio: 1,
@@ -36,14 +35,16 @@ class SubCategoryItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Sizes.s10.r),
                 child: Image.asset(
                   image,
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          Text(
-            title,
-            style: getRegularStyle(color: ColorManager.primary),
+          SizedBox(height: 8.h),
+          Expanded(
+            child: Text(
+              title,
+              style: getRegularStyle(color: ColorManager.primary),
+            ),
           ),
         ],
       ),

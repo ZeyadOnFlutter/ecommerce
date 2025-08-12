@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeScreenAppBar(),
+      appBar: const HomeScreenAppBar(),
       extendBody: false,
       body: tabs[currentIndex],
       bottomNavigationBar: ClipRRect(

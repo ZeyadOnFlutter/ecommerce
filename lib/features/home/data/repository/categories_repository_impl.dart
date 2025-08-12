@@ -21,4 +21,21 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
       return Left(Faliure(e.message));
     }
   }
+
+  @override
+  Future<Either<Faliure, List<Categories>>> getSubCategories(
+    String categoryId,
+  ) async {
+    try {
+      final response =
+          await _categoriesRemoteDataSource.getSubCategories(categoryId);
+      return Right(
+        response.data.map((subcategory) {
+          return subcategory.toEntity;
+        }).toList(),
+      );
+    } on EcommerceAppExceptions catch (e) {
+      return Left(Faliure(e.message));
+    }
+  }
 }

@@ -26,4 +26,17 @@ class CategoriesApiDataSource implements CategoriesRemoteDataSource {
       throw RemoteException(e.toString());
     }
   }
+
+  @override
+  Future<AllCategoriesResponse> getSubCategories(String categoryId) async {
+    try {
+      final response = await _mainDio
+          .get('${ApiManager.categoriesEndPoint}/$categoryId/subcategories');
+      return AllCategoriesResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      throw ApiErrorHandler.handleDioError(e);
+    } catch (e) {
+      throw RemoteException(e.toString());
+    }
+  }
 }

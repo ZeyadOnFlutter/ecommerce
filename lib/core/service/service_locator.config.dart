@@ -57,8 +57,14 @@ import 'package:ecommerce/features/home/domain/repository/categories_repository.
     as _i423;
 import 'package:ecommerce/features/home/domain/use_case/categories_use_case.dart'
     as _i327;
+import 'package:ecommerce/features/home/domain/use_case/subcategories_use_case.dart'
+    as _i41;
 import 'package:ecommerce/features/home/presentation/cubit/categories_cubit.dart'
     as _i156;
+import 'package:ecommerce/features/home/presentation/cubit/selectedcategory_cubit.dart'
+    as _i258;
+import 'package:ecommerce/features/home/presentation/cubit/subcategories_cubit.dart'
+    as _i932;
 import 'package:ecommerce/features/products/data/data_source/product_api_data_source.dart'
     as _i614;
 import 'package:ecommerce/features/products/data/data_source/product_remote_data_source.dart'
@@ -99,6 +105,8 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i920.ProductQuantityCubit>(
         () => _i920.ProductQuantityCubit());
+    gh.lazySingleton<_i258.SelectedCategoryCubit>(
+        () => _i258.SelectedCategoryCubit());
     gh.singleton<_i350.AuthLocalDataSource>(
         () => _i132.AuthSharedPrefsDataSource(gh<_i460.SharedPreferences>()));
     gh.singleton<_i361.Dio>(
@@ -147,6 +155,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i327.CategoriesUseCase>(
         () => _i327.CategoriesUseCase(gh<_i423.CategoriesRepository>()));
+    gh.lazySingleton<_i41.SubcategoriesUseCase>(
+        () => _i41.SubcategoriesUseCase(gh<_i423.CategoriesRepository>()));
     gh.lazySingleton<_i498.ProductUseCase>(
         () => _i498.ProductUseCase(gh<_i879.ProductRepository>()));
     gh.lazySingleton<_i933.SpecificProductUseCase>(
@@ -155,6 +165,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i320.ProductCubit(gh<_i498.ProductUseCase>()));
     gh.lazySingleton<_i120.SpecificProductCubit>(
         () => _i120.SpecificProductCubit(gh<_i933.SpecificProductUseCase>()));
+    gh.lazySingleton<_i932.SubcategoriesCubit>(
+        () => _i932.SubcategoriesCubit(gh<_i41.SubcategoriesUseCase>()));
     gh.lazySingleton<_i156.CategoriesCubit>(
         () => _i156.CategoriesCubit(gh<_i327.CategoriesUseCase>()));
     return this;

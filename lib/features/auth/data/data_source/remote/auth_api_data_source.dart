@@ -23,10 +23,10 @@ class AuthApiDataSource implements AuthRemoteDataSource {
         ApiManager.signUpEndPoint,
         data: registerRequest.toJson(),
       );
-      log(response.data);
+      log(response.data.toString());
       return AuthResponse.fromJson(response.data);
     } on DioException catch (dioException) {
-      log(dioException.response?.data);
+      log(dioException.response?.data.toString() ?? '');
       throw ApiErrorHandler.handleDioError(dioException);
     } catch (e) {
       throw RemoteException(e.toString());

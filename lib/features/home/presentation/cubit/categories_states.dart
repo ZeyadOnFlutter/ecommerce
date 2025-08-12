@@ -17,3 +17,17 @@ class CategoriesSuccess extends CategoriesStates {
 
   CategoriesSuccess(this.categories);
 }
+
+class SubCategoriesLoading extends CategoriesStates {}
+
+class SubCategoriesError extends CategoriesStates {
+  final String errorMessage;
+
+  SubCategoriesError(this.errorMessage);
+}
+
+class SubCategoriesSuccess extends CategoriesStates {
+  final List<Categories> categories;
+
+  SubCategoriesSuccess(this.categories);
+}

@@ -1,3 +1,4 @@
+import 'package:ecommerce/features/home/domain/entities/categories.dart';
 import 'package:ecommerce/features/home/domain/use_case/categories_use_case.dart';
 import 'package:ecommerce/features/home/presentation/cubit/categories_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,13 +10,16 @@ class CategoriesCubit extends Cubit<CategoriesStates> {
     getAllCategories();
   }
   final CategoriesUseCase _categoriesUseCase;
-
+  late List<Categories> mycategories;
   Future<void> getAllCategories() async {
     emit(CategoriesLoading());
     final response = await _categoriesUseCase();
     response.fold(
       (faliure) => emit(CategoriesError(faliure.message)),
-      (categories) => emit(CategoriesSuccess(categories)),
+      (categories) {
+        mycategories = categories;
+        emit(CategoriesSuccess(categories));
+      },
     );
   }
 }
