@@ -1,16 +1,20 @@
-# ecommerce
+🛒 Flutter eCommerce App
 
-A new Flutter project.
+A modern, feature-rich Flutter eCommerce application built with Cubit (Bloc) for state management, Dio for API communication, and Clean Architecture principles.
 
-## Getting Started
+✨ Features
 
-This project is a starting point for a Flutter application.
+Authentication – Secure login and signup with API integration.
+Product Browsing – Browse products by categories and subcategories.
+Wishlist – Save favorite products for later.
+Cart Management – Add, remove, and update cart items.
+Persistent Storage – Using Shared Preferences for storing user sessions.
+Error Handling & API Interceptors – Smooth and reliable API calls.
 
-A few resources to get you started if this is your first Flutter project:
+🛠 Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Framework: Flutter
+State Management: Cubit (Bloc)
+Networking: Dio
+Local Storage: Shared Preferences
+Architecture: Clean Architecture

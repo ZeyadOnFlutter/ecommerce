@@ -5,17 +5,20 @@ import 'package:ecommerce/core/resources/font_manager.dart';
 import 'package:ecommerce/core/resources/styles_manager.dart';
 import 'package:ecommerce/core/resources/values_manager.dart';
 import 'package:ecommerce/core/routes/routes.dart';
+import 'package:ecommerce/core/service/service_locator.dart';
 import 'package:ecommerce/core/widgets/product_counter.dart';
 import 'package:ecommerce/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:ecommerce/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:ecommerce/features/products/presentation/cubit/specific_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem(this._cartItemEntity, this.index);
+  const CartItem(this._cartItemEntity, this.index, this.productId);
   final CartItemEntity _cartItemEntity;
   final int index;
+  final String productId;
   @override
   Widget build(BuildContext context) {
     final bool isPortrait =
@@ -25,9 +28,12 @@ class CartItem extends StatelessWidget {
     final cartCubit = context.read<CartCubit>();
 
     return InkWell(
-      onTap: () => Navigator.of(context).pushNamed(
-        Routes.productDetails,
-      ),
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          Routes.productDetails,
+        );
+        getIt<SpecificProductCubit>().getSpecificProduct(productId);
+      },
       child: Container(
         height: isPortrait ? height * 0.14 : width * 0.23,
         decoration: BoxDecoration(

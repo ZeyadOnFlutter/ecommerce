@@ -1,6 +1,9 @@
 import 'package:ecommerce/core/resources/color_manager.dart';
 import 'package:ecommerce/core/resources/styles_manager.dart';
+import 'package:ecommerce/features/products/presentation/cubit/product_quantity_cubit.dart';
+import 'package:ecommerce/features/products/presentation/cubit/product_quantity_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCounter extends StatefulWidget {
@@ -21,7 +24,7 @@ class ProductCounter extends StatefulWidget {
 class _ProductCounterState extends State<ProductCounter> {
   @override
   Widget build(BuildContext context) {
-    int _counter = widget.initialValue;
+    int counter = widget.initialValue;
     return Container(
       decoration: BoxDecoration(
         color: ColorManager.primary,
@@ -32,9 +35,9 @@ class _ProductCounterState extends State<ProductCounter> {
         children: [
           InkWell(
             onTap: () {
-              if (_counter == 1) return;
-              setState(() => _counter--);
-              widget.onDecrement(_counter);
+              if (counter == 1) return;
+              counter--;
+              widget.onDecrement(counter);
             },
             child: Icon(
               Icons.remove_circle_outline,
@@ -45,18 +48,22 @@ class _ProductCounterState extends State<ProductCounter> {
           SizedBox(
             width: 18.w,
           ),
-          Text(
-            '$_counter',
-            style: getMediumStyle(color: ColorManager.white)
-                .copyWith(fontSize: 18.sp),
+          BlocBuilder<ProductQuantityCubit, ProductQuantityState>(
+            builder: (context, state) {
+              return Text(
+                '$counter',
+                style: getMediumStyle(color: ColorManager.white)
+                    .copyWith(fontSize: 18.sp),
+              );
+            },
           ),
           SizedBox(
             width: 18.w,
           ),
           InkWell(
             onTap: () {
-              setState(() => _counter++);
-              widget.onIncrement(_counter);
+              counter++;
+              widget.onIncrement(counter);
             },
             child: Icon(
               Icons.add_circle_outline,
