@@ -81,7 +81,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ProductSlider(
                         items: specificproductstate.specificProduct.images
                             .map((imageUrl) {
-                          return ProductImage(imageUrl: imageUrl);
+                          return ProductImage(
+                            imageUrl: imageUrl,
+                            productId: specificproductstate.specificProduct.id,
+                          );
                         }).toList(),
                         initialIndex: 0,
                       ),

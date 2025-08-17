@@ -1,6 +1,8 @@
+import 'package:ecommerce/core/service/service_locator.dart';
 import 'package:ecommerce/features/products/domain/entities/product.dart';
 import 'package:ecommerce/features/products/domain/use_case/product_use_case.dart';
 import 'package:ecommerce/features/products/presentation/cubit/produc_states.dart';
+import 'package:ecommerce/features/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -35,9 +37,10 @@ class ProductCubit extends Cubit<ProductStates> {
         emit(ProductError(faliure.message));
         isLoading = false;
       },
-      (myproducts) {
+      (myproducts) async {
         products.addAll(myproducts);
         page++;
+        await getIt<WishListCubit>().getUserWishList();
         emit(ProductSuccess(products));
         hasMoreData = myproducts.length == limit;
         isLoading = false;

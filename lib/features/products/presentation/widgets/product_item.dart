@@ -11,8 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem(this.product);
+  const ProductItem({required this.product, required this.index});
   final Product product;
+  final int index;
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
@@ -54,7 +55,10 @@ class ProductItem extends StatelessWidget {
                   PositionedDirectional(
                     top: screenSize.height * 0.01,
                     end: screenSize.width * 0.02,
-                    child: HeartButton(onTap: () {}),
+                    child: HeartButton(
+                      productId: product.id,
+                      onTap: () {},
+                    ),
                   ),
                 ],
               ),

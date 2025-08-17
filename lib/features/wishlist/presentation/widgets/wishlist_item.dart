@@ -3,15 +3,16 @@ import 'package:ecommerce/core/resources/color_manager.dart';
 import 'package:ecommerce/core/resources/values_manager.dart';
 import 'package:ecommerce/core/routes/routes.dart';
 import 'package:ecommerce/core/widgets/heart_button.dart';
+import 'package:ecommerce/features/wishlist/domain/entities/get_wishlist_entity.dart';
 import 'package:ecommerce/features/wishlist/presentation/widgets/add_to_cart_button.dart';
 import 'package:ecommerce/features/wishlist/presentation/widgets/wishlist_item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WishlistItem extends StatelessWidget {
-  const WishlistItem({required this.product});
+  const WishlistItem({required this.wishlistItem});
 
-  final Map<String, dynamic> product;
+  final GetWishlist wishlistItem;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,6 @@ class WishlistItem extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
         context,
         Routes.productDetails,
-        arguments: product,
       ),
       child: Container(
         height: Sizes.s135.h,
@@ -42,7 +42,7 @@ class WishlistItem extends StatelessWidget {
                   width: Sizes.s120.w,
                   height: Sizes.s135.h,
                   fit: BoxFit.cover,
-                  imageUrl: product['imageUrl'],
+                  imageUrl: wishlistItem.imageCover,
                   placeholder: (_, __) => const Center(
                     child: CircularProgressIndicator(
                       color: ColorManager.primary,
@@ -59,7 +59,7 @@ class WishlistItem extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsetsDirectional.only(start: Insets.s8.w),
                 child: WishlistItemDetails(
-                  product: product,
+                  wishlistItem: wishlistItem,
                 ),
               ),
             ),
@@ -68,6 +68,7 @@ class WishlistItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 HeartButton(
+                  productId: wishlistItem.id,
                   onTap: () {},
                 ),
                 SizedBox(height: Sizes.s14.h),

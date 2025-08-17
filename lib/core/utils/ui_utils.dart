@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/resources/color_manager.dart';
 import 'package:ecommerce/core/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ class UIUtils {
   static void showLoading(BuildContext context) => showDialog(
         context: context,
         barrierDismissible: false,
+        barrierColor: ColorManager.black.withOpacity(0.1),
         builder: (_) => PopScope(
           canPop: false,
           child: AlertDialog(

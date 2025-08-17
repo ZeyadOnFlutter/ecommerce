@@ -22,6 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
     const WishlistTab(),
     const ProfileTab(),
   ];
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

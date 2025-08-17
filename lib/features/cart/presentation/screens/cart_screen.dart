@@ -77,7 +77,8 @@ class _CartScreenState extends State<CartScreen> {
                             itemBuilder: (_, index) => CartItem(
                               _cartCubit.cartModelEntity.cartItem[index],
                               index,
-                              _cartCubit.cartModelEntity.cartItem[index].id,
+                              _cartCubit.cartModelEntity.cartItem[index]
+                                  .cartProduct.id,
                             ),
                             itemCount:
                                 _cartCubit.cartModelEntity.cartItem.length,

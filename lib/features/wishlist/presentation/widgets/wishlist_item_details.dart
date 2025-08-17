@@ -1,8 +1,8 @@
-import 'package:colornames/colornames.dart';
 import 'package:ecommerce/core/resources/color_manager.dart';
 import 'package:ecommerce/core/resources/font_manager.dart';
 import 'package:ecommerce/core/resources/styles_manager.dart';
 import 'package:ecommerce/core/resources/values_manager.dart';
+import 'package:ecommerce/features/wishlist/domain/entities/get_wishlist_entity.dart';
 import 'package:ecommerce/features/wishlist/presentation/widgets/custom_auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +10,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WishlistItemDetails extends StatelessWidget {
-  const WishlistItemDetails({required this.product});
+  const WishlistItemDetails({required this.wishlistItem});
 
-  final Map<String, dynamic> product;
+  final GetWishlist wishlistItem;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class WishlistItemDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CustomAutoSizeText(
-          data: product['title'],
+          data: wishlistItem.title,
           textStyle: getSemiBoldStyle(
             color: ColorManager.primaryDark,
             fontSize: FontSize.s18,
@@ -29,28 +29,8 @@ class WishlistItemDetails extends StatelessWidget {
         ),
         Row(
           children: [
-            Container(
-              margin: EdgeInsetsDirectional.only(end: Sizes.s10.w),
-              width: Sizes.s14.w,
-              height: Sizes.s14.h,
-              decoration: BoxDecoration(
-                color: product['color'],
-                shape: BoxShape.circle,
-              ),
-            ),
             CustomAutoSizeText(
-              data: (product['color'] as Color).colorName,
-              textStyle: getMediumStyle(
-                color: ColorManager.primaryDark,
-                fontSize: FontSize.s14,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            CustomAutoSizeText(
-              data: 'EGP ${product['finalPrice']}  ',
+              data: 'EGP ${wishlistItem.price}  ',
               textStyle: getSemiBoldStyle(
                 color: ColorManager.primaryDark,
                 fontSize: FontSize.s18,
@@ -58,7 +38,8 @@ class WishlistItemDetails extends StatelessWidget {
                 letterSpacing: 0.17,
               ),
             ),
-            product['salePrice'] == null
+            // ignore: unnecessary_null_comparison
+            wishlistItem.priceAfterDiscount == null
                 ? const SizedBox.shrink()
                 : Flexible(
                     child: Column(
@@ -68,7 +49,7 @@ class WishlistItemDetails extends StatelessWidget {
                           height: Sizes.s10.h,
                         ),
                         CustomAutoSizeText(
-                          data: 'EGP ${product['salePrice']}',
+                          data: 'EGP ${wishlistItem.priceAfterDiscount}',
                           textStyle: getMediumStyle(
                             color: ColorManager.appBarTitle.withOpacity(.6),
                           ).copyWith(

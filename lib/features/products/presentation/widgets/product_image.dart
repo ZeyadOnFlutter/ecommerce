@@ -6,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProductImage extends StatelessWidget {
   final String imageUrl;
   final void Function()? onTap;
+  final String? productId;
 
   const ProductImage({
     required this.imageUrl,
+    this.productId,
     this.onTap,
   });
 
@@ -30,6 +32,7 @@ class ProductImage extends StatelessWidget {
         alignment: AlignmentDirectional.topEnd,
         child: HeartButton(
           onTap: onTap,
+          productId: productId,
         ),
       ),
     );

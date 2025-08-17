@@ -80,7 +80,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   ),
                   itemBuilder: (_, index) => index >= state.products.length
                       ? const LoadingIndicator()
-                      : ProductItem(state.products[index]),
+                      : ProductItem(
+                          product: state.products[index],
+                          index: index,
+                        ),
                   itemCount: state.products.length +
                       (getIt<ProductCubit>().hasMoreData ? 2 : 0),
                   padding: EdgeInsets.all(Insets.s16.sp),
