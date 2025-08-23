@@ -1,20 +1,27 @@
-🛒 Flutter eCommerce App
+# 🛒 Ecommerce App
 
-A modern, feature-rich Flutter eCommerce application built with Cubit (Bloc) for state management, Dio for API communication, and Clean Architecture principles.
+A cross-platform Flutter-based eCommerce application with **Clean Architecture** and **API integration**.  
+It provides authentication, product browsing, cart, and wishlist management.
 
-✨ Features
+## 🚀 Features
+- 🔐 User authentication (login/register with API)
+- 🛍️ Product browsing with categories
+- 🛒 Cart & Wishlist functionality
+- 📦 Persistent storage with SharedPreferences
+- 🏗️ Built with Clean Architecture & Cubit
 
-Authentication – Secure login and signup with API integration.
-Product Browsing – Browse products by categories and subcategories.
-Wishlist – Save favorite products for later.
-Cart Management – Add, remove, and update cart items.
-Persistent Storage – Using Shared Preferences for storing user sessions.
-Error Handling & API Interceptors – Smooth and reliable API calls.
+## 🛠️ Tech Stack
+- Flutter, Dart
+- Cubit (State Management)
+- Dio (API integration)
+- SharedPreferences
 
-🛠 Tech Stack
+## 📸 Screenshots
+(Add your screenshots here)
 
-Framework: Flutter
-State Management: Cubit (Bloc)
-Networking: Dio
-Local Storage: Shared Preferences
-Architecture: Clean Architecture
+## ⚙️ Installation
+```bash
+git clone https://github.com/codingking02/ecommerce.git
+cd ecommerce
+flutter pub get
+flutter run
