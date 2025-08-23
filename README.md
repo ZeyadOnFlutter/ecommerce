@@ -16,9 +16,6 @@ It provides authentication, product browsing, cart, and wishlist management.
 - Dio (API integration)
 - SharedPreferences
 
-## 📸 Screenshots
-(Add your screenshots here)
-
 ## ⚙️ Installation
 ```bash
 git clone https://github.com/codingking02/ecommerce.git
